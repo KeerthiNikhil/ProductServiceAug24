@@ -1,16 +1,13 @@
-package com.example.ProductServiceAug24.mapped_super_class;
+package com.example.ProductServiceAug24.table_per_class;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.management.MXBean;
 
 //@Setter
 //@Getter
 @Data
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity(name="tpc_users")
 public class User {
     @Id
     private int id;
