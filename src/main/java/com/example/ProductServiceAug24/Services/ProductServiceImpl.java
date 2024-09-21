@@ -6,6 +6,8 @@ import com.example.ProductServiceAug24.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service("dbImpl")
 public class ProductServiceImpl implements ProductService{
 
@@ -13,7 +15,13 @@ public class ProductServiceImpl implements ProductService{
     ProductRepository productRepository;
     @Override
     public Product getProductById(long id) throws ProductNotFoundException {
-        return null;
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            return optionalProduct.get();
+        }
+        else{
+            throw new ProductNotFoundException("Product with id"+id+" Not Found");
+        }
     }
 
     @Override
